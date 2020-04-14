@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/main.css">
+    <title>Rails JavaScript Riddles API</title>
+</head>
+<body>
+    <div class ="container-fluid">
+
+        <h1>Riddles</h1>
+        <div class="container riddles-list">
+            <h4>List of Riddles</h4>
+            <div id="riddles-list-div">
+                <!--list of riddles will be placed here-->
+            </div>
+            <br>
+
+        </div>
+        <br>
+        <div class ="container">
+            <h6>Add a Riddle</h6>
+            <form id="riddles-form", action="#">
+                <label for="content">Content:</label>
+                <textarea name="content" id="content"cols="30" rows="10"></textarea><br>
+
+                <label for="answer">Answer:</label>
+                <input type="text" name="answer" id="answer"><br>
+
+                <label for="name">Added By:</label>
+                <input type="text" name="name" id="name"><br>
+
+                <input type="submit" value="Add a Riddle">
+
+            </form>
+        </div>
+    </div>
+
+    <script src="src/index.js"></script>
+</body>
+</html>
