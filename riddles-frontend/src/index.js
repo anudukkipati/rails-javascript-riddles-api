@@ -91,9 +91,12 @@ const getAddedBy = () => document.getElementById('name').value;
 // }
 
 function resetFormInput() {
-    getContent().value = ""
-    getAnswer().value = ""
-    getAddedBy().value = ""
+    // debugger
+    // getContent().value = ''
+    // getAnswer().value = ''
+    // getAddedBy().value = ''
+     document.getElementById('content').value = ''
+     document.getElementById('answer').value = ''
+    document.getElementById('name').value = ''
 }
 
-  
