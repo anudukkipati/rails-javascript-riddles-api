@@ -63,6 +63,7 @@ class Riddle {
                let riddle = new Riddle(data)
                riddle.render()
                resetFormInput()
+             
                
             //   riddles.push(riddle)
             //   render(riddle)
