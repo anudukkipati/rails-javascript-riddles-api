@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     Riddle.getRiddles()
     //getForm().addEventListener('submit', createRiddleForm)
     getForm().addEventListener('submit', Riddle.createRiddleForm)
+    attachListeners()
+    
 })
 
 //let riddles = []
@@ -13,88 +15,32 @@ const getForm = () => document.querySelector('form')
 const getContent = () => document.getElementById('content').value
 const getAnswer = () => document.getElementById('answer').value
 const getAddedBy = () => document.getElementById('name').value;
+//const button = document.getElementById("edit-riddle-sumbit-button")
 
-// function template(riddle) {
-//     return `
-//     <div>
-//        <div>
-//        <p>Riddle: ${riddle.content}</p>
-//        <p>Answer: ${riddle.answer}</p>
-//        <p>Added By: ${riddle.user.name}</p>
+//document.getElementById("riddles-list-div").addEventListener('click', function() {
+    //console.log("I am clicked")
 
-//        <button>Edit</button>
-//        </div>
-//     </div>
-//     `
-// }
-// function getRiddles() {
-//     fetch('http://localhost:3000/api/riddles')
-//        .then(function (response){
-//            if(response.status !== 200) {
-//                throw new Error(response.statusText)
-//            }
-//            return response.json()
-//        })
-//        .then(function (data){
-//            riddles = data
-//            renderRiddles()
-//        })
-//        .catch(errors => console.log(errors))
-// }
+//})
 
-// function renderRiddles() {
+function attachListeners() {
 
-//     riddles.forEach(riddle => render(riddle))
-// }
+    document.getElementById("riddles-list-div").addEventListener('click', Riddle.editRiddle,true)
 
-// function render(riddle) {
-//     getRiddlesList().innerHTML += template(riddle)
-// }
+    // document.getElementById("user-riddles").addEventListener('click', function(){
+    //     console.log('I am clicked')
+    // })
+    document.getElementById("user-riddles").addEventListener('click', Riddle.getUserRiddles)
+}
 
-// function createRiddleForm(event) {
-//     event.preventDefault()
 
-//     const content = getContent()
-//     const answer = getAnswer()
-//     const name = getAddedBy()
 
-//     let strongParams = {
+ 
 
-//         user: {name: name},
-//         riddle: {
-//             content: content,
-//             answer: answer
-//         }
-//     }
-     
-  
-//     fetch('http://localhost:3000/api/riddles', {
-//         method: 'POST',
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(strongParams)
-//     })
-//       .then(response => response.json())
-    
-//       .then(riddle => {
-//         if (riddle.error) {
-//             throw new Error(riddle.error)
-//           } else {
-           
-//               riddles.push(riddle)
-//               render(riddle)
-//           } 
-//       })
-//       .catch(errors => console.log(errors))
-// }
+
 
 function resetFormInput() {
     // debugger
-    // getContent().value = ''
-    // getAnswer().value = ''
-    // getAddedBy().value = ''
+   
      document.getElementById('content').value = ''
      document.getElementById('answer').value = ''
     document.getElementById('name').value = ''
