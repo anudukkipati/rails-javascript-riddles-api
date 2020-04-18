@@ -10,7 +10,7 @@ class RiddlesController < ApplicationController
 
   # GET /riddles/1
   def show
-    render json: @riddle
+    render json: @riddle, include: [:user]
   end
 
   # POST /riddles
@@ -20,7 +20,7 @@ class RiddlesController < ApplicationController
    @riddle = @user.riddles.build(riddle_params)
 
     if @riddle.save
-      render json: @riddle, include:[:user], except: [:user_id, :created_at, :updated_at], status: :created
+      render json: @riddle, include:[:user], status: :created #, except: [:user_id, :created_at, :updated_at],
     else
       render json: @riddle.errors, status: :unprocessable_entity
     end
