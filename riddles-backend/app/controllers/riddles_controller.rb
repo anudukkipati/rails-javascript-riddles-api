@@ -1,9 +1,12 @@
 class RiddlesController < ApplicationController
   before_action :set_riddle, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy]
+
 
   # GET /riddles
   def index
     @riddles = Riddle.all
+     @users = User.all
 
     render json: @riddles, include: [:user]
   end
@@ -45,7 +48,9 @@ class RiddlesController < ApplicationController
     def set_riddle
       @riddle = Riddle.find(params[:id])
     end
-
+    def set_user
+      @user = User.find(params[:id])
+    end
     def user_params
       params.require(:user).permit(:name)
     end

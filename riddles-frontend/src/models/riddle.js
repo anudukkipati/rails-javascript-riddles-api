@@ -72,10 +72,10 @@ class Riddle {
     .catch(errors => console.log(errors))
    }
 
-   static editRiddle(event) {
+   static editOrSelectRiddle(event) {
     console.log(event)
     //debugger
-     if(event.target.className == "edit-riddle") {
+     if(event.target.className === "edit-riddle") {
          const id = event.target.parentElement.dataset.id
          const div = event.target.parentElement
          div.contentEditable = true
@@ -98,10 +98,16 @@ class Riddle {
          let answerEdit = event.target.parentElement.firstElementChild.nextElementSibling.innerText
          let addedByEdit = event.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.innerText
           Riddle.updateRiddle(id, contentEdit, answerEdit, addedByEdit)
-          
+          div.contentEditable = false
           let button = document.querySelector(".edit-riddle-submit-button")
           button.remove()
     
+     } else if(event.target.className === "user-link"){
+         //console.log(event)
+         const id = event.target.dataset.id
+         //console.log(id)
+         Riddle.getUserRiddles(id)
+         //debugger
      }
 
 }
@@ -129,33 +135,52 @@ class Riddle {
     if (data.error) {
         throw new Error(data.error)
       } else {
-           // Riddle.getRiddles()
-        //    let riddle =  data
-        //    riddle.render()
-           //resetFormInput()
+            
            console.log(data)
-        //    let riddle = new Riddle(data)
-        //    riddle.render()
+        
            this.getRiddles()
-           this.removeButton()
-        //   riddles.push(riddle)
-        //   render(riddle)
+        
       }
   })
   .catch(errors => console.log(errors))
   
     
   // debugger
-   // }
+   
   }
+  
+  
 
-    static getUserRiddles() {
-        API.get(`/users/${this.user.id}/riddles`)
+    static getUserRiddles(id) {
+       
+        API.get(`/users/${id}`)
         
         .then(function (riddles){
-            riddles.forEach(data => new Riddle(data))
-            Riddle.renderRiddles()
             
+             let data = riddles 
+             console.log(data)
+             console.log(data["riddles"])
+             let dataRiddles = data["riddles"]
+             console.log(dataRiddles)
+          
+            getUserRiddlesList().innerHTML = ""
+            let riddleData = dataRiddles.map(riddle => {
+                const riddleLI = `
+               
+                
+                
+                <p> User ${riddle.user_id}'s riddle</p>
+                <li class="riddleItems">
+                    <div id="user-riddle-div" data-id="${riddle.user_id}">
+                        <p> ${riddle.content}></p>    
+                        <p class="riddleItems"> ${riddle.answer}</p>
+                    </div>
+                 </li>
+                <!--</div>-->
+                `
+                getUserRiddlesList().innerHTML += riddleLI
+            } )
+                  
         })
         .catch(errors => console.log(errors))
 
@@ -181,13 +206,21 @@ Riddle.prototype.template = function () {
            <h6 style = "color: orange">To edit, click on Edit and click on the text content</h6>
            
         </div>
-           <a href="#user-riddle" class="user-link">Click here to see ${this.user.name}'s riddles</a>
+           <a href="#user-riddle" class="user-link" data-id="${this.user.id}">Click here to see ${this.user.name}'s riddles</a>
         `
     }
 
     Riddle.prototype.userRiddleTemplate = function () {
         return `
+           <div>
+             <div id="user-riddle-div" data-id="${this.user.id}">
 
+                 <h6>${this.user.name}'s Riddles</h6>
+                 <p class="riddleItems"> ${this.content}</p>
+                 <p class="riddleItems"> ${this.answer}</p>
+
+             </div>
+           </div>
 
 
         `

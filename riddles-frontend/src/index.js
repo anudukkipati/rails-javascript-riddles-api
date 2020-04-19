@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //let riddles = []
 const getRiddlesList = () => document.querySelector('div#riddles-list-div')
+const getUserRiddlesList = () => document.querySelector('ul#user-riddles')
+
 const getForm = () => document.querySelector('form')
 const getContent = () => document.getElementById('content').value
 const getAnswer = () => document.getElementById('answer').value
@@ -24,12 +26,16 @@ const getAddedBy = () => document.getElementById('name').value;
 
 function attachListeners() {
 
-    document.getElementById("riddles-list-div").addEventListener('click', Riddle.editRiddle,true)
+    document.getElementById("riddles-list-div").addEventListener('click', Riddle.editOrSelectRiddle,true)
 
     // document.getElementById("user-riddles").addEventListener('click', function(){
     //     console.log('I am clicked')
     // })
-    document.getElementById("user-riddles").addEventListener('click', Riddle.getUserRiddles)
+    
+    // document.querySelector(".user-link").addEventListener('click', function(){
+    //     console.log('I am clicked')
+    // })
+    document.getElementById("user-riddles").addEventListener('click', Riddle.setUserId)
 }
 
 
