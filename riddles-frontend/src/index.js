@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //load all riddles by sending an AJAX call to the rails backend 
     //getRiddles();
     Riddle.getRiddles()
+  
     //getForm().addEventListener('submit', createRiddleForm)
     getForm().addEventListener('submit', Riddle.createRiddleForm)
     attachListeners()
@@ -28,19 +29,8 @@ function attachListeners() {
 
     document.getElementById("riddles-list-div").addEventListener('click', Riddle.editOrSelectRiddle,true)
 
-    // document.getElementById("user-riddles").addEventListener('click', function(){
-    //     console.log('I am clicked')
-    // })
     
-    // document.querySelector(".user-link").addEventListener('click', function(){
-    //     console.log('I am clicked')
-    // })
-    document.getElementById("user-riddles").addEventListener('click', Riddle.setUserId)
 }
-
-
-
- 
 
 
 

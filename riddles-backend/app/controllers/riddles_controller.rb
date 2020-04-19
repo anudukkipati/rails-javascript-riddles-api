@@ -1,6 +1,6 @@
 class RiddlesController < ApplicationController
   before_action :set_riddle, only: [:show, :update, :destroy]
-  before_action :set_user, only: [:show, :update, :destroy]
+  #before_action :set_user, only: [:show, :update, :destroy]
 
 
   # GET /riddles
@@ -41,6 +41,7 @@ class RiddlesController < ApplicationController
   # DELETE /riddles/1
   def destroy
     @riddle.destroy
+    render json: @riddle.errors, status: :ok
   end
 
   private
@@ -48,9 +49,9 @@ class RiddlesController < ApplicationController
     def set_riddle
       @riddle = Riddle.find(params[:id])
     end
-    def set_user
-      @user = User.find(params[:id])
-    end
+    # def set_user
+    #   @user = User.find(params[:id])
+    # end
     def user_params
       params.require(:user).permit(:name)
     end

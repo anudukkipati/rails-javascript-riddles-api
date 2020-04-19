@@ -12,15 +12,7 @@ class API {
             })
     }
     
-    static get(url){
-        return fetch(this.baseURL + url)
-            .then(function (response){
-                if(response.status !== 200) {
-                    throw new Error(response.statusText)
-                }
-                return response.json()
-            })
-    }
+   
 
     static post(url, data) {
         return fetch(this.baseURL + url, {
@@ -44,5 +36,16 @@ class API {
                 body: JSON.stringify(data)
            })
               .then(response => response.json())
+     }
+
+     static delete(url) {
+         return fetch(this.baseURL + url, {
+             method: 'DELETE'
+            //  headers:{
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json'
+            //  }
+         })
+         .then(response => response.json())
      }
 }

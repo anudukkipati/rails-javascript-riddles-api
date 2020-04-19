@@ -53,9 +53,7 @@ class Riddle {
                riddle.render()
                resetFormInput()
              
-               
-            //   riddles.push(riddle)
-            //   render(riddle)
+             
           }
       })
       .catch(errors => console.log(errors))
@@ -73,7 +71,7 @@ class Riddle {
    }
 
    static editOrSelectRiddle(event) {
-    console.log(event)
+   // console.log(event)
     //debugger
      if(event.target.className === "edit-riddle") {
          const id = event.target.parentElement.dataset.id
@@ -89,16 +87,16 @@ class Riddle {
          
        } else if (event.target.className === "edit-riddle-submit-button") {
           event.preventDefault()
-          console.log("id is", event.target.parentElement.dataset.id)
-          console.log(event.target.parentElement.innerHTML)
+         // console.log("id is", event.target.parentElement.dataset.id)
+         // console.log(event.target.parentElement.innerHTML)
           const id = event.target.parentElement.dataset.id
           const div = event.target.parentElement
+          div.contentEditable = false
 
          let contentEdit = event.target.parentElement.firstElementChild.innerText
          let answerEdit = event.target.parentElement.firstElementChild.nextElementSibling.innerText
          let addedByEdit = event.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.innerText
           Riddle.updateRiddle(id, contentEdit, answerEdit, addedByEdit)
-          div.contentEditable = false
           let button = document.querySelector(".edit-riddle-submit-button")
           button.remove()
     
@@ -108,6 +106,12 @@ class Riddle {
          //console.log(id)
          Riddle.getUserRiddles(id)
          //debugger
+     } else if(event.target.className ==="delete-riddle") {
+        // console.log(event)
+        
+        const id = event.target.parentElement.dataset.id
+        Riddle.deleteRiddle(id)
+         
      }
 
 }
@@ -158,10 +162,10 @@ class Riddle {
         .then(function (riddles){
             
              let data = riddles 
-             console.log(data)
-             console.log(data["riddles"])
+            // console.log(data)
+            // console.log(data["riddles"])
              let dataRiddles = data["riddles"]
-             console.log(dataRiddles)
+            // console.log(dataRiddles)
           
             getUserRiddlesList().innerHTML = ""
             let riddleData = dataRiddles.map(riddle => {
@@ -172,11 +176,11 @@ class Riddle {
                 <p> User ${riddle.user_id}'s riddle</p>
                 <li class="riddleItems">
                     <div id="user-riddle-div" data-id="${riddle.user_id}">
-                        <p> ${riddle.content}></p>    
+                        <p> ${riddle.content}</p>    
                         <p class="riddleItems"> ${riddle.answer}</p>
                     </div>
                  </li>
-                <!--</div>-->
+                
                 `
                 getUserRiddlesList().innerHTML += riddleLI
             } )
@@ -185,6 +189,20 @@ class Riddle {
         .catch(errors => console.log(errors))
 
     }
+
+    static deleteRiddle(id){
+       API.delete(`/riddles/${id}`)
+    
+       .then(data => {
+        if (data.error) {
+            throw new Error(data.error)
+          } else {
+              this.getRiddles()
+          }
+        //this.getRiddles()
+    })
+    .catch(errors => console.log(errors))
+  } 
 }
 
 
@@ -201,7 +219,8 @@ Riddle.prototype.template = function () {
            <!--<h6>ADDED BY:</h6>-->
            <p class="riddleItems"> ${this.user.name}</p>
            
-           <button class="edit-riddle">Edit</button>
+           <button class="edit-riddle">Edit</button><br><br>
+           <button class="delete-riddle" data-id=${this.id}>Delete</button>
            </div>
            <h6 style = "color: orange">To edit, click on Edit and click on the text content</h6>
            
@@ -210,18 +229,4 @@ Riddle.prototype.template = function () {
         `
     }
 
-    Riddle.prototype.userRiddleTemplate = function () {
-        return `
-           <div>
-             <div id="user-riddle-div" data-id="${this.user.id}">
-
-                 <h6>${this.user.name}'s Riddles</h6>
-                 <p class="riddleItems"> ${this.content}</p>
-                 <p class="riddleItems"> ${this.answer}</p>
-
-             </div>
-           </div>
-
-
-        `
-    }
+   
