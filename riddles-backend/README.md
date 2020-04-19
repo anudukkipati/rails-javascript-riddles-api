@@ -1,24 +1,12 @@
 # README
+##Description
+Riddles API is an app with a Ruby on Rails API backend and JavaScript frontend. It has a user model and a riddle model. Users can add, edit and delete riddles.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Installing Instructions
+To run this app, clone the repository and run `bundle install`.
+Then you can setup and seed the database:
+`rails db:migrate`
+`rails db:seed`
+Start the server: `rails s`
+Open the index.html in the browser of your choice
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
