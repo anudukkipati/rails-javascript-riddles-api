@@ -27,7 +27,7 @@ const getAddedBy = () => document.getElementById('name').value;
 
 function attachListeners() {
 
-    document.getElementById("riddles-list-div").addEventListener('click', Riddle.editOrSelectRiddle,true)
+    document.getElementById("riddles-list-div").addEventListener('click', Riddle.editOrSelectRiddle)//,true
 
     
 }

@@ -109,7 +109,7 @@ class Riddle {
      } else if(event.target.className ==="delete-riddle") {
         // console.log(event)
         
-        const id = event.target.parentElement.dataset.id
+        const id = event.target.dataset.id
         Riddle.deleteRiddle(id)
          
      }
@@ -140,7 +140,7 @@ class Riddle {
         throw new Error(data.error)
       } else {
             
-           console.log(data)
+           //console.log(data)
         
            this.getRiddles()
         
@@ -194,12 +194,12 @@ class Riddle {
        API.delete(`/riddles/${id}`)
     
        .then(data => {
-        if (data.error) {
-            throw new Error(data.error)
-          } else {
+         if (data.error) {
+             throw new Error(data.error)
+           } else {
               this.getRiddles()
           }
-        //this.getRiddles()
+       
     })
     .catch(errors => console.log(errors))
   } 

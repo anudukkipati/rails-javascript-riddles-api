@@ -40,11 +40,11 @@ class API {
 
      static delete(url) {
          return fetch(this.baseURL + url, {
-             method: 'DELETE'
-            //  headers:{
-            //     'Accept': 'application/json',
-            //     'Content-Type': 'application/json'
-            //  }
+             method: 'DELETE',
+             headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+             }
          })
          .then(response => response.json())
      }
