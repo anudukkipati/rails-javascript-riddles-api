@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //load all riddles by sending an AJAX call to the rails backend 
     //getRiddles();
     Riddle.getRiddles()
+   // Riddle.selectARiddles()
   
     //getForm().addEventListener('submit', createRiddleForm)
     getForm().addEventListener('submit', Riddle.createRiddleForm)
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //let riddles = []
 const getRiddlesList = () => document.querySelector('div#riddles-list-div')
 const getUserRiddlesList = () => document.querySelector('ul#user-riddles')
+const getARiddlesList = () => document.querySelector('div#button-div')
 
 const getForm = () => document.querySelector('form')
 const getContent = () => document.getElementById('content').value
@@ -28,6 +30,7 @@ const getAddedBy = () => document.getElementById('name').value;
 function attachListeners() {
 
     document.getElementById("riddles-list-div").addEventListener('click', Riddle.editOrSelectRiddle)//,true
+    document.getElementById("button-div").addEventListener('click', Riddle.selectARiddles)
 
     
 }

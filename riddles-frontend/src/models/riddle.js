@@ -23,7 +23,17 @@ class Riddle {
         Riddle.all.forEach(riddle => riddle.render())
     }
 
+
+    static renderARiddles(riddles) {
+        getRiddlesList().innerHTML = ""
+        riddles.forEach(riddle => riddle.render())
+        
+    }
+
+    
+
     render() {
+       // getRiddlesList().innerHTML = ""
         getRiddlesList().innerHTML += this.template()
     }
 
@@ -115,8 +125,18 @@ class Riddle {
      }
 
 }
+static selectARiddles(){
+   
+    API.get('/riddles')
+       .then(function (riddles){
 
- 
+          // debugger
+         let riddlesA =   riddles.filter(data => data["content"][0] === "A").map(data => new Riddle(data))
+        
+           Riddle.renderARiddles(riddlesA)
+    })
+}
+
   static updateRiddle(id,contentEdit, answerEdit, addedByEdit) {
   
    // debugger
